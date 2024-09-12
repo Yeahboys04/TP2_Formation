@@ -1,0 +1,23 @@
+@startuml
+title : Calcule de la moyenne d'une promo d'étudiants
+participant Main
+participant GroupeEtudiant
+
+activate Main
+Main -> GroupeEtudiant : moyenneMatierePromo(matiere :  String)
+activate GroupeEtudiant
+loop Pour tout les etudiant de Etudiant
+GroupeEtudiant -> Etudiant : getNote(matiere :  String)
+activate Etudiant
+Etudiant -> GroupeEtudiant : note : double
+deactivate Etudiant
+end
+GroupeEtudiant -> Main : moyenne : double
+
+
+
+
+
+
+
+@enduml

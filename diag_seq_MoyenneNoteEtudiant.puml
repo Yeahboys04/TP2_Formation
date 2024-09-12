@@ -1,0 +1,21 @@
+@startuml
+title : Calcule de la moyenne d'un étudiant
+participant Main
+participant Etudiant
+participant Formation
+activate Main
+Main -> Etudiant : moyenneNote()
+activate Etudiant
+loop Pour toutes les matiere dans resultat
+    Etudiant -> Formation : getCoef(matiere :  String)
+    activate Formation
+    Formation -> Etudiant :coef : double
+end
+deactivate Formation
+Etudiant -> Main : moyenne : double
+deactivate Etudiant
+
+
+
+
+@enduml
