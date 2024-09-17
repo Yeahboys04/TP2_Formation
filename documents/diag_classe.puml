@@ -1,0 +1,32 @@
+@startuml
+class Identite{
+ - nip : String
+ - nom : String
+ - prenom : String
+}
+
+
+class Etudiant{
+
+ - resultat : HashMap<String,ArrayList<Double>>
+
+ + moyenneNote() : Double
+}
+
+
+class Formation{
+ - identifiant : String
+ - matieres : HashMap<String,Double>
+}
+
+
+class GroupeEtudiant{
+ + moyenneNote(String matiere) : double
+}
+
+
+Etudiant "*"<--" " GroupeEtudiant : -etudiants
+Formation "1"<-"1" GroupeEtudiant : -formation
+Identite "1"<-"1" Etudiant : -identite
+Formation "1"<-"1" Etudiant : -formation
+@enduml
