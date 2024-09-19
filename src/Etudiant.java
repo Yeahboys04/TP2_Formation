@@ -91,7 +91,7 @@ public class Etudiant {
     public Double calculerMoyenne(String matiere) {
         Double moyenne = (double) 0;
         if(!resultat.isEmpty()){
-            if (estDansFormation(matiere)) {
+            if (estDansFormation(matiere) && resultat.containsKey(matiere)) {
                 for (Double note : resultat.get(matiere)) {
                     moyenne += note;
                 }
