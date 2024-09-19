@@ -14,6 +14,15 @@ public class Identite {
     }
 
     /**
+     * Constructeur par défaut de la classe Identite
+     */
+    public Identite(){
+        this.NIP = "000000000";
+        this.nom = "Guenego";
+        this.prenom = "Pierre Andre";
+    }
+
+    /**
      * Accesseur pour le NIP
      * @return NIP
      */
