@@ -56,10 +56,10 @@ public class Etudiant {
      * @param matiere Le nom de la matière.
      * @param note    La note à ajouter (comprise entre 0 et 20).
      */
-    public void ajouterNote(String matiere, double note) {
+    public void ajouterNote(String matiere, double note) throws InvalidNoteFormatException {
         // Valider la note (elle doit être entre 0 et 20)
         if (note > 20 || note < 0) {
-            note = 0.0;
+            throw new InvalidNoteFormatException();
         }
 
         if (!this.resultat.isEmpty()) {
@@ -102,6 +102,15 @@ public class Etudiant {
             }
         } else {
             moyenne = null;
+        }
+        return moyenne;
+    }
+
+    public Double calculerMoyenneG(){
+        Set<String> keys = formation.getMatieres().keySet();
+        Double moyenne =(double)0;
+        for(String matiere : keys){
+            moyenne += this.calculerMoyenne(matiere);
         }
         return moyenne;
     }
