@@ -46,7 +46,7 @@ public class EtudiantTest {
         }
         assertEquals(true,res);
         assertEquals(null, etudiant.calculerMoyenne("Informatique"),
-                "La note pour Informatique doit être 0.0 car elle dépassait 20.");
+                "La note pour Informatique doit être null car elle dépassait 20.");
     }
 
     /**
