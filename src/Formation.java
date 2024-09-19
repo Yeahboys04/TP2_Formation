@@ -76,4 +76,8 @@ public class Formation {
         return matieres;
     }
 
+    public String getIdentifiant(){
+        return identifiant;
+    }
+
 }

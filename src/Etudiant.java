@@ -136,4 +136,8 @@ public class Etudiant {
         }
         return res;
     }
+
+    public Formation getFormation(){
+        return this.formation;
+    }
 }
