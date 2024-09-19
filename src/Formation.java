@@ -75,4 +75,5 @@ public class Formation {
     public HashMap<String, Double> getMatieres() {
         return matieres;
     }
+
 }
