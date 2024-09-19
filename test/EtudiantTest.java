@@ -101,4 +101,21 @@ public class EtudiantTest {
         assertNull(etudiant.calculerMoyenne("Informatique"),
                 "La moyenne pour Informatique doit être null si aucune note n'a été ajoutée.");
     }
+
+
+    /**
+     * Test de la méthode calculerMoyenneG() pour s'assurer que la moyenne générale est calculée correctement.
+     */
+    @Test
+    public void testCalculerMoyenneG() throws Exception {
+        // Ajout des notes pour chaque matière
+        etudiant.ajouterNote("Mathématiques", 10.0);
+        etudiant.ajouterNote("Mathématiques", 20.0); // Moyenne Mathématiques = 15.0
+        etudiant.ajouterNote("Informatique", 15.0);
+        etudiant.ajouterNote("Informatique", 10.0);  // Moyenne Informatique = 12.5
+
+        // Calcul de la moyenne générale = (15.0 + 12.5) = 27.5
+        assertEquals(27.5, etudiant.calculerMoyenneG(),
+                "La moyenne générale doit être 27.5.");
+    }
 }
