@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GroupeTest {
+public class GroupeTest2 {
 
     private Groupe groupe;
-    private Etudiant etu1, etu2, etu3;
+    private Etudiant etu1, etu2, etu3,etu4;
     private Formation formation1;
     private Formation formation2;
 
@@ -24,12 +24,14 @@ public class GroupeTest {
         // Crée trois étudiants avec des noms différents
         etu1 = new Etudiant(new Identite("123", "Zidane", "Zinedine"), formation1, new HashMap<>());
         etu2 = new Etudiant(new Identite("124", "Henry", "Thierry"), formation2, new HashMap<>());
+        etu4 = new Etudiant(new Identite("126", "Henry", "Thierry"), formation1, new HashMap<>());
         etu3 = new Etudiant(new Identite("125", "Mbappe", "Kylian"), formation1, new HashMap<>());
 
         // Ajoute les étudiants au groupe
         groupe.ajouterEtudiant(etu1);
         groupe.ajouterEtudiant(etu2);
         groupe.ajouterEtudiant(etu3);
+        groupe.ajouterEtudiant(etu4);
     }
 
     /**
@@ -85,15 +87,13 @@ public class GroupeTest {
         // Vérifie l'ordre des étudiants
         assertEquals("Henry", groupe.getEtudiants().get(0).getIdentite().getNom(),
                 "Le premier étudiant après tri alphabétique doit être Henry.");
-        assertEquals("Zidane", groupe.getEtudiants().get(1).getIdentite().getNom(),
+        assertEquals("Zidane", groupe.getEtudiants().get(2).getIdentite().getNom(),
                 "Le deuxième étudiant après tri alphabétique doit être Zidane.");
     }
 
     @Test
     public void triAntiAlpha() {
-        // Ajoute des étudiants au groupe
-        groupe.ajouterEtudiant(etu1);
-        groupe.ajouterEtudiant(etu2);
+
 
         // Trie par ordre alphabétique inverse
         groupe.triAntiAlpha();
@@ -101,7 +101,7 @@ public class GroupeTest {
         // Vérifie l'ordre des étudiants
         assertEquals("Zidane", groupe.getEtudiants().get(0).getIdentite().getNom(),
                 "Le premier étudiant après tri anti-alphabétique doit être Zidane.");
-        assertEquals("Henry", groupe.getEtudiants().get(1).getIdentite().getNom(),
+        assertEquals("Henry", groupe.getEtudiants().get(2).getIdentite().getNom(),
                 "Le deuxième étudiant après tri anti-alphabétique doit être Henry.");
 
     }
