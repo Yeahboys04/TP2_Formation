@@ -140,4 +140,8 @@ public class Etudiant {
     public Formation getFormation(){
         return this.formation;
     }
+
+    public Identite getIdentite(){
+        return this.identite;
+    }
 }
