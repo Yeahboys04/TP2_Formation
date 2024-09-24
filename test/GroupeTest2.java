@@ -88,7 +88,7 @@ public class GroupeTest2 {
         assertEquals("Henry", groupe.getEtudiants().get(0).getIdentite().getNom(),
                 "Le premier étudiant après tri alphabétique doit être Henry.");
         assertEquals("Zidane", groupe.getEtudiants().get(2).getIdentite().getNom(),
-                "Le deuxième étudiant après tri alphabétique doit être Zidane.");
+                "Le troisième étudiant après tri alphabétique doit être Zidane.");
     }
 
     @Test
@@ -102,7 +102,7 @@ public class GroupeTest2 {
         assertEquals("Zidane", groupe.getEtudiants().get(0).getIdentite().getNom(),
                 "Le premier étudiant après tri anti-alphabétique doit être Zidane.");
         assertEquals("Henry", groupe.getEtudiants().get(2).getIdentite().getNom(),
-                "Le deuxième étudiant après tri anti-alphabétique doit être Henry.");
+                "Le troisième étudiant après tri anti-alphabétique doit être Henry.");
 
     }
 }
