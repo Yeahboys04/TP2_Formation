@@ -68,8 +68,8 @@ public class Etudiant {
                 // Ajouter la note à la liste des notes pour la matière
                 if (this.resultat.containsKey(matiere)) {
                     this.resultat.get(matiere).add(note);
-                }else{
-                    this.resultat.put(matiere,new ArrayList<Double>());
+                } else {
+                    this.resultat.put(matiere, new ArrayList<Double>());
                     this.resultat.get(matiere).add(note);
 
                 }
@@ -90,14 +90,14 @@ public class Etudiant {
      */
     public Double calculerMoyenne(String matiere) {
         Double moyenne = (double) 0;
-        if(!resultat.isEmpty()){
+        if (!resultat.isEmpty()) {
             if (estDansFormation(matiere) && resultat.containsKey(matiere)) {
                 for (Double note : resultat.get(matiere)) {
                     moyenne += note;
                 }
                 // Diviser par le nombre de notes si au moins une note existe
                 moyenne /= resultat.get(matiere).size();
-            } else{
+            } else {
                 moyenne = null;
             }
         } else {
@@ -106,10 +106,10 @@ public class Etudiant {
         return moyenne;
     }
 
-    public Double calculerMoyenneG(){
+    public Double calculerMoyenneG() {
         Set<String> keys = formation.getMatieres().keySet();
-        Double moyenne =(double)0;
-        for(String matiere : keys){
+        Double moyenne = (double) 0;
+        for (String matiere : keys) {
             moyenne += this.calculerMoyenne(matiere);
         }
         return moyenne;
@@ -137,11 +137,13 @@ public class Etudiant {
         return res;
     }
 
-    public Formation getFormation(){
+    public Formation getFormation() {
         return this.formation;
     }
 
-    public Identite getIdentite(){
+    public Identite getIdentite() {
         return this.identite;
     }
+
+
 }

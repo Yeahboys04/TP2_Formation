@@ -45,14 +45,14 @@ public class Groupe {
      */
 
     public void triAlpha() {
-        groupeEtu.sort((Etudiant e1, Etudiant e2) -> e1.getIdentite().getNom().compareTo(e2.getIdentite().getNom()));
+        groupeEtu.sort(new EtudiantComparator());
     }
 
     /**
      * Méthode triAntiAlpha qui trie les étudiants par ordre alphabétique inverse.
      */
     public void triAntiAlpha() {
-        groupeEtu.sort((Etudiant e1, Etudiant e2) -> e2.getIdentite().getNom().compareTo(e1.getIdentite().getNom()));
+        groupeEtu.sort(new EtudiantComparator().reversed());
     }
 
     /**
