@@ -64,7 +64,7 @@ public class Etudiant {
 
         if (!this.resultat.isEmpty()) {
             // Vérifier si la matière fait partie de la formation de l'étudiant
-            if (this.estDansFormation(matiere)) {
+            if (formation.estDansFormation(matiere)) {
                 // Ajouter la note à la liste des notes pour la matière
                 if (this.resultat.containsKey(matiere)) {
                     this.resultat.get(matiere).add(note);
@@ -88,54 +88,43 @@ public class Etudiant {
      * @param matiere Le nom de la matière.
      * @return La moyenne des notes de la matière. Si la matière n'existe pas, retourne 0.
      */
-    public Double calculerMoyenne(String matiere) {
+    public Double calculerMoyenne(String matiere) throws NoneNoteException, InvalidMatiereFormation {
         Double moyenne = (double) 0;
         if(!resultat.isEmpty()){
-            if (estDansFormation(matiere) && resultat.containsKey(matiere)) {
+            if (formation.estDansFormation(matiere) && resultat.containsKey(matiere)) {
                 for (Double note : resultat.get(matiere)) {
                     moyenne += note;
                 }
                 // Diviser par le nombre de notes si au moins une note existe
                 moyenne /= resultat.get(matiere).size();
             } else{
-                moyenne = null;
+                throw new InvalidMatiereFormation("La matiere : "+ matiere +"  n'est pas dans la formation");
             }
         } else {
-            moyenne = null;
+            throw new NoneNoteException("Il n'y a pas de notes pour la matière " + matiere);
         }
         return moyenne;
     }
 
     public Double calculerMoyenneG(){
-        Set<String> keys = formation.getMatieres().keySet();
-        Double moyenne =(double)0;
-        for(String matiere : keys){
-            moyenne += this.calculerMoyenne(matiere);
-        }
-        return moyenne;
-    }
-
-    /**
-     * Vérifie si une matière fait partie de la formation de l'étudiant.
-     *
-     * @param matiere Le nom de la matière.
-     * @return {@code true} si la matière est dans la formation, sinon {@code false}.
-     */
-    public boolean estDansFormation(String matiere) {
-        // Obtenir la liste des matières de la formation
-        HashMap<String, Double> matieres = formation.getMatieres();
+        HashMap<String,Double> matieres = formation.getMatieres();
         Set<String> keys = matieres.keySet();
-
-        // Vérifier si la matière est dans la formation
-        boolean res = false;
-        for (String m : keys) {
-            if (m.equals(matiere)) {
-                res = true;
-                break;
+        Double moyenne =0.0;
+        Double sommeCoef = 0.0;
+        for(String matiere : keys){
+            Double coef = matieres.get(matiere);
+            sommeCoef += coef;
+            try {
+                moyenne += this.calculerMoyenne(matiere) * coef;
+            } catch (NoneNoteException | InvalidMatiereFormation e){
+                moyenne+=0;
             }
+
         }
-        return res;
+        return moyenne/sommeCoef;
     }
+
+
 
     public Formation getFormation(){
         return this.formation;

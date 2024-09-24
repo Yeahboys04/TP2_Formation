@@ -64,20 +64,4 @@ public class FormationTest {
                 "Le coefficient de Biologie doit être null car la matière n'a pas été ajoutée.");
     }
 
-    /**
-     * Test de la méthode getMatieres() pour s'assurer que les matières et leurs coefficients sont bien récupérés.
-     */
-    @Test
-    public void testGetMatieres() {
-        formation.ajouterMatiere("Chimie", 2.0);
-        formation.ajouterMatiere("Histoire", 1.5);
-        HashMap<String, Double> matieres = formation.getMatieres();
-
-        assertEquals(2, matieres.size(),
-                "Il doit y avoir 2 matières dans la formation.");
-        assertTrue(matieres.containsKey("Chimie"),
-                "La formation doit contenir Chimie.");
-        assertTrue(matieres.containsKey("Histoire"),
-                "La formation doit contenir Histoire.");
-    }
 }

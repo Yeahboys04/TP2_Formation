@@ -79,5 +79,14 @@ public class Formation {
     public String getIdentifiant(){
         return identifiant;
     }
+    /**
+     * Vérifie si une matière fait partie de la formation.
+     *
+     * @param matiere Le nom de la matière.
+     * @return {@code true} si la matière est dans la formation, sinon {@code false}.
+     */
+    public boolean estDansFormation(String matiere){
+        return this.matieres.containsKey(matiere);
+    }
 
 }

@@ -44,9 +44,14 @@ public class EtudiantTest {
         } catch (InvalidNoteFormatException e){
             res = true;
         }
-        assertEquals(true,res);
-        assertEquals(null, etudiant.calculerMoyenne("Informatique"),
-                "La note pour Informatique doit être null car elle dépassait 20.");
+        assertTrue(res);
+        res = false;
+        try{
+            etudiant.calculerMoyenne("Informatique");
+        } catch (InvalidMatiereFormation e){
+            res = true;
+        }
+        assertTrue(res);
     }
 
     /**
@@ -69,11 +74,11 @@ public class EtudiantTest {
      */
     @Test
     public void testEstDansFormation() {
-        assertTrue(etudiant.estDansFormation("Mathématiques"),
+        assertTrue(etudiant.getFormation().estDansFormation("Mathématiques"),
                 "Mathématiques devrait être dans la formation.");
-        assertTrue(etudiant.estDansFormation("Informatique"),
+        assertTrue(etudiant.getFormation().estDansFormation("Informatique"),
                 "Informatique devrait être dans la formation.");
-        assertFalse(etudiant.estDansFormation("Physique"),
+        assertFalse(etudiant.getFormation().estDansFormation("Physique"),
                 "Physique ne devrait pas être dans la formation.");
     }
 
@@ -84,22 +89,33 @@ public class EtudiantTest {
     public void testAjouterNoteMatiereNonExistante() throws Exception {
         // Essaye d'ajouter une note à une matière qui n'est pas dans la formation
 
+
         etudiant.ajouterNote("Physique", 12.0);
-
-
-
+        boolean res = false;
+        try {
+            etudiant.calculerMoyenne("Physique");
+        } catch (InvalidMatiereFormation e) {
+            res = true;
+        }
         // La matière Physique ne devrait pas exister, donc aucune note ne devrait être ajoutée
-        assertNull(etudiant.calculerMoyenne("Physique"),
-                "La moyenne pour Physique doit être null car la matière n'est pas dans la formation.");
+        assertTrue(res);
     }
+
+
+
 
     /**
      * Test pour vérifier que calculerMoyenne() retourne null pour une matière sans notes.
      */
     @Test
-    public void testCalculerMoyenneSansNotes() {
-        assertNull(etudiant.calculerMoyenne("Informatique"),
-                "La moyenne pour Informatique doit être null si aucune note n'a été ajoutée.");
+    public void testCalculerMoyenneSansNotes() throws Exception{
+        boolean res = false;
+        try{
+            etudiant.calculerMoyenne("Informatique");
+        } catch (NoneNoteException e){
+            res = true;
+        }
+        assertTrue(res);
     }
 
 
@@ -114,8 +130,8 @@ public class EtudiantTest {
         etudiant.ajouterNote("Informatique", 15.0);
         etudiant.ajouterNote("Informatique", 10.0);  // Moyenne Informatique = 12.5
 
-        // Calcul de la moyenne générale = (15.0 + 12.5) = 27.5
-        assertEquals(27.5, etudiant.calculerMoyenneG(),
-                "La moyenne générale doit être 27.5.");
+        // Calcul de la moyenne générale = (15.0*3 + 12.5*4) = 13.5 environ
+        assertEquals((15.0*3 + 12.5*4)/(3+4), etudiant.calculerMoyenneG(),
+                "La moyenne générale doit être 13.57 environ");
     }
 }
