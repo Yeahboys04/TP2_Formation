@@ -27,9 +27,9 @@ public class GroupeTest {
         etu3 = new Etudiant(new Identite("125", "Mbappe", "Kylian"), formation1, new HashMap<>());
 
         // Ajoute les étudiants au groupe
-        groupe.ajouterEtudiant(etu1);
-        groupe.ajouterEtudiant(etu2);
-        groupe.ajouterEtudiant(etu3);
+        //groupe.ajouterEtudiant(etu1);
+        //groupe.ajouterEtudiant(etu2);
+        //groupe.ajouterEtudiant(etu3);
     }
 
     /**
@@ -74,7 +74,7 @@ public class GroupeTest {
     }
 
     @Test
-    public void triAlpha() {
+    public void testTriAlpha() {
         // Ajoute des étudiants au groupe
         groupe.ajouterEtudiant(etu1);
         groupe.ajouterEtudiant(etu2);
@@ -90,7 +90,7 @@ public class GroupeTest {
     }
 
     @Test
-    public void triAntiAlpha() {
+    public void testTriAntiAlpha() {
         // Ajoute des étudiants au groupe
         groupe.ajouterEtudiant(etu1);
         groupe.ajouterEtudiant(etu2);
