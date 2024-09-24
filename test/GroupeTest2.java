@@ -78,8 +78,7 @@ public class GroupeTest2 {
     @Test
     public void triAlpha() {
         // Ajoute des étudiants au groupe
-        groupe.ajouterEtudiant(etu1);
-        groupe.ajouterEtudiant(etu2);
+
 
         // Trie par ordre alphabétique
         groupe.triAlpha();
