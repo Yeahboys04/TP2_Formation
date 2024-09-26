@@ -59,7 +59,7 @@ public class GroupeTest2 {
      */
     @Test
     public void testSupprimerEtudiant() {
-        groupe.ajouterEtudiant(etu1);
+
         groupe.suprimmerEtudiant(etu1);
         assertFalse(groupe.groupeEtu.contains(etu1),
                 "L'étudiant doit être supprimé du groupe.");
