@@ -10,6 +10,9 @@ public class GroupeTest {
     private Etudiant etudiant1;
     private Etudiant etudiant2;
     private Etudiant etudiant3;
+    private Etudiant etudiant4;
+    private Etudiant etu1, etu2, etu3, etu4;
+
     private Formation formation1;
     private Formation formation2;
 
@@ -27,13 +30,18 @@ public class GroupeTest {
         formation1.ajouterMatiere("Informatique", 3.0);
 
         // Crée un groupe pour la formation 1
-        groupe = new Groupe();
-        groupe.formation = formation1; // Assigne la formation manuellement pour simplifier
+        groupe = new Groupe(formation1); // Initialise le groupe avec formation1
 
-        // Crée deux étudiants, un avec la même formation que le groupe, l'autre avec une formation différente
+        // Crée des étudiants avec différentes formations et identités
         etudiant1 = new Etudiant(new Identite("123", "Doe", "John"), formation1, new HashMap<>());
         etudiant2 = new Etudiant(new Identite("456", "Smith", "Anna"), formation1, new HashMap<>());
         etudiant3 = new Etudiant(new Identite("457", "Smith", "Anna"), formation2, new HashMap<>());
+        etudiant4 = new Etudiant(new Identite("123", "Zidane", "Zinedine"), formation1, new HashMap<>());
+
+        etu1 = new Etudiant(new Identite("123", "Zidane", "Zinedine"), formation1, new HashMap<>());
+        etu2 = new Etudiant(new Identite("124", "Henry", "Thierry"), formation2, new HashMap<>());
+        etu3 = new Etudiant(new Identite("125", "Mbappe", "Kylian"), formation1, new HashMap<>());
+        etu4 = new Etudiant(new Identite("126", "Henry", "Thierry"), formation1, new HashMap<>());
 
         // Ajoute des notes aux étudiants pour les tests de moyenne
         try {
@@ -45,6 +53,12 @@ public class GroupeTest {
         } catch (InvalidNoteFormatException e) {
             fail("Erreur lors de l'ajout des notes: " + e.getMessage());
         }
+
+        // Ajoute les étudiants au groupe
+        groupe.ajouterEtudiant(etu1);
+        groupe.ajouterEtudiant(etu2);
+        groupe.ajouterEtudiant(etu3);
+        groupe.ajouterEtudiant(etu4);
     }
 
     /**
@@ -127,11 +141,73 @@ public class GroupeTest {
 
         // Calcul de la moyenne pour la matière "Physique"
         boolean res = false;
-        try{
+        try {
             Double moyennePhysique = groupe.calculerMoyenne("Physique");
-        } catch (NoneNoteException e){
+        } catch (NoneNoteException e) {
             res = true;
         }
         assertTrue(res);
     }
+
+    @Test
+    public void testTriParMerite() throws NoneNoteException {
+        // Ajout des étudiants au groupe
+        groupe.ajouterEtudiant(etudiant1);
+        groupe.ajouterEtudiant(etudiant2);
+
+        // Assure-toi que les moyennes sont correctes
+        assertEquals(16.8, etudiant1.calculerMoyenneG(), 0.1, "La moyenne générale d'etudiant1 devrait être 16.8");
+        assertEquals(11.2, etudiant2.calculerMoyenneG(), 0.1, "La moyenne générale d'etudiant2 devrait être 11.0");
+
+        // Applique le tri par mérite
+        groupe.triParMerite();
+
+        // Vérifie que les étudiants sont triés par mérite
+        assertEquals(etudiant1, groupe.getEtudiants().get(0), "L'étudiant avec la meilleure moyenne devrait être en premier.");
+        assertEquals(etudiant2, groupe.getEtudiants().get(1), "L'étudiant avec la moins bonne moyenne devrait être en second.");
+    }
+
+    @Test
+    public void testTriParMeriteSansNotes() {
+        // Créer un étudiant sans notes
+        Etudiant etudiantSansNotes = etu1;
+
+        // Ajoute les étudiants au groupe
+        groupe.ajouterEtudiant(etudiant1);
+
+
+        // Applique le tri par mérite
+        groupe.triParMerite();
+
+        // Vérifie que l'étudiant avec des notes est en premier, et l'étudiant sans notes en dernier
+        assertEquals(etudiant1, groupe.getEtudiants().get(0), "L'étudiant avec des notes doit être classé en premier.");
+        assertEquals(etudiantSansNotes, groupe.getEtudiants().get(1), "L'étudiant sans notes doit être classé en dernier.");
+    }
+
+
+    @Test
+    public void triAlpha() {
+        // Trie par ordre alphabétique
+        groupe.triAlpha();
+
+        // Vérifie l'ordre des étudiants
+        assertEquals("Henry", groupe.getEtudiants().get(0).getIdentite().getNom(),
+                "Le premier étudiant après tri alphabétique doit être Henry.");
+        assertEquals("Zidane", groupe.getEtudiants().get(2).getIdentite().getNom(),
+                "Le troisième étudiant après tri alphabétique doit être Zidane.");
+    }
+
+    @Test
+    public void triAntiAlpha() {
+        // Trie par ordre anti-alphabétique
+        groupe.triAntiAlpha();
+
+        // Vérifie l'ordre des étudiants
+        assertEquals("Zidane", groupe.getEtudiants().get(0).getIdentite().getNom(),
+                "Le premier étudiant après tri anti-alphabétique doit être Zidane.");
+        assertEquals("Henry", groupe.getEtudiants().get(2).getIdentite().getNom(),
+                "Le troisième étudiant après tri anti-alphabétique doit être Henry.");
+    }
+
+
 }

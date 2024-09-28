@@ -29,7 +29,7 @@ public class Groupe {
      * @param etu
      */
     public void ajouterEtudiant(Etudiant etu){
-        if(etu.getFormation().getIdentifiant().equals(formation.getIdentifiant())){
+        if(etu.getFormation().getIdentifiant().equals(formation.getIdentifiant()) && !groupeEtu.contains(etu)){
             groupeEtu.add(etu);
         }
     }
@@ -107,6 +107,10 @@ public class Groupe {
         groupeEtu.sort(new EtudiantComparator().reversed());
     }
 
+    public void triParMerite(){
+        groupeEtu.sort(new EtudiantComparatorMoyenne().reversed());
+    }
+
     /**
      * Méthode getEtudiants qui retourne la liste des étudiants du groupe.
      * @return
@@ -114,7 +118,6 @@ public class Groupe {
     public ArrayList<Etudiant> getEtudiants(){
         return groupeEtu;
     }
-
 
 }
 

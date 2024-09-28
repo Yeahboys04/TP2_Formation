@@ -135,4 +135,12 @@ public class Etudiant {
     }
 
 
+    @Override
+    public String toString() {
+        return "Etudiant{" +
+                "identite=" + identite +
+                ", formation=" + formation +
+                ", resultat=" + resultat +
+                '}';
+    }
 }

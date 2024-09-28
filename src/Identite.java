@@ -1,6 +1,15 @@
 public class Identite {
     private String NIP, nom, prenom;
 
+    @Override
+    public String toString() {
+        return "Identite{" +
+                "NIP='" + NIP + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                '}';
+    }
+
     /**
      * Constructeur de la classe Identite
      * @param NIP
